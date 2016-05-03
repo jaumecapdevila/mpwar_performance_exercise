@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
+<head>
+    <title>Write Article</title>
+</head>
+<link rel="stylesheet" type="text/css" href="assets/dist/css/app.min.css">
 <body>
     <h1>Write Article</h1>
-
     <form action="{{ path('writeArticle') }}" method="POST">
         Title <br />
         <input type="text" name="title" id="title" /> <br />
@@ -11,4 +14,5 @@
         <br />
         <input type="submit" value="Save" />
     </form>
+    <script type="text/javascript" src="assets/dist/js/index.min.js"></script>
 </body>
