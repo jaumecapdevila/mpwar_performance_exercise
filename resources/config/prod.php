@@ -6,12 +6,12 @@ $app['twig.path'] = array(__DIR__ . '/../templates');
 $app['twig.options'] = [];
 
 $app['db.options'] = [
-    "driver"    => "pdo_mysql",
-    "host"      => 'mysql',
-    "user"      => 'root',
-    "password"  => 'root',
-    "dbname"    => 'mpwar_performance_blog',
-    "charset"   => "utf8"
+    "driver" => "pdo_mysql",
+    "host" => 'localhost',
+    "user" => 'root',
+    "password" => 'vagrantpass',
+    "dbname" => 'mpwar_performance_blog',
+    "charset" => "utf8",
 ];
 $app['orm.proxies_dir'] = '/tmp/proxies';
 $app['orm.auto_generate_proxies'] = true;
@@ -22,5 +22,5 @@ $app['orm.em.options'] = [
             "namespace" => "Performance",
             "path" => __DIR__ . "/../../src/Performance/Infrastructure/Database/mappings",
         ],
-    ]
+    ],
 ];
