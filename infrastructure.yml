@@ -1,0 +1,22 @@
+---
+
+- name: "Install PHP5 and Apache2"
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  become: yes
+  become_user: root
+  with_items:
+    - php5
+    - mysql-server
+
+
+- name: "Ubuntu user is the owner of /var/www/html"
+  file:
+    path: /var/www/html
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755
+  become: yes
+  become_user: root
