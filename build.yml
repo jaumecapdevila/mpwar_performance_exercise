@@ -1,0 +1,9 @@
+---
+
+- name: "Update local composer"
+  shell: composer self-update
+  connection: local
+
+- name: "Build project dependencies"
+  shell: composer install
+  connection: local
