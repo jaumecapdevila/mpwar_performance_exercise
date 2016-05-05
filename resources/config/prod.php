@@ -24,3 +24,5 @@ $app['orm.em.options'] = [
         ],
     ],
 ];
+
+$app['session.storage.handler'] = null;
