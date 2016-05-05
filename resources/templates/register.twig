@@ -5,20 +5,26 @@
 </head>
 <link rel="stylesheet" type="text/css" href="assets/dist/css/app.min.css">
 <body>
-    <h1>Register</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+                <h1>Register</h1>
+                <form action="{{ path('register') }}" method="POST">
+                    <fieldset>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required />
 
-    <form action="{{ path('register') }}" method="POST">
-        <fieldset>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required />
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required />
+                    </fieldset>
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required />
-        </fieldset>
-
-        <fieldset class="form-actions">
-            <input type="submit" value="Login" />
-        </fieldset>
-    </form>
+                    <fieldset class="form-actions">
+                        <input type="submit" value="Login" />
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    
     <script type="text/javascript" src="assets/dist/js/index.min.js"></script>
 </body>
