@@ -12,13 +12,13 @@ $app->get( '/register', 'controllers.signUp:get' )->bind('register');
 $app->post( '/register', 'controllers.signUp:post' );
 
 $app->get( '/articles', 'controllers.home:get' )->bind('articles');
-$app->get( '/articles/{article_id}', 'controllers.readArticle:get' )->bind('article');
+$app->get( '/articles/{articleId}', 'controllers.readArticle:get' )->bind('article');
 
 $app->get( '/writeArticle', 'controllers.writeArticle:get' );
 $app->post( '/writeArticle', 'controllers.writeArticle:post' )->bind('writeArticle');
 
-$app->get( '/editArticle/{article_id}', 'controllers.editArticle:get' )->bind('editArticle');
-$app->post( '/editArticle/{article_id}', 'controllers.editArticle:post' );
+$app->get( '/editArticle/{articleId}', 'controllers.editArticle:get' )->bind('editArticle');
+$app->post( '/editArticle/{articleId}', 'controllers.editArticle:post' );
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {

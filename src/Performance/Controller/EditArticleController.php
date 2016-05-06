@@ -45,13 +45,13 @@ class EditArticleController
         $this->session = $session;
     }
 
-    public function get($article_id)
+    public function get($articleId)
     {
-        if (!$this->session->get('author_id')) {
+        if (!$this->session->get('authorId')) {
             return new RedirectResponse($this->url_generator->generate('login'));
         }
 
-        $article = $this->readArticle->execute($article_id);
+        $article = $this->readArticle->execute($articleId);
         return new Response($this->template->render('editArticle.twig', ['article' => $article]));
     }
 

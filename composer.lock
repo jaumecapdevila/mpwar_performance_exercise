@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4d21f2eff3ac6c2af34d1eaa34428103",
-    "content-hash": "49e76f2e1cc5cdf08635df2bd1a18208",
+    "hash": "621822a586fc0644600910c19e0d6a52",
+    "content-hash": "ac62556dabaa4aff36cbec119953505c",
     "packages": [
         {
             "name": "dflydev/doctrine-orm-service-provider",
@@ -662,6 +662,55 @@
                 "orm"
             ],
             "time": "2016-01-05 21:34:58"
+        },
+        {
+            "name": "jrschumacher/symfony-redis-session-handler",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jrschumacher/symfony-redis-session-handler.git",
+                "reference": "48841730581110bb6d5b820a82d5798880964b03"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jrschumacher/symfony-redis-session-handler/zipball/48841730581110bb6d5b820a82d5798880964b03",
+                "reference": "48841730581110bb6d5b820a82d5798880964b03",
+                "shasum": ""
+            },
+            "require": {
+                "ext-redis": "*",
+                "symfony/http-foundation": ">=1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Symfony": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Markus Bachmann",
+                    "email": "markus.bachmann@bachi.biz",
+                    "homepage": "http://bachi.biz"
+                },
+                {
+                    "name": "Ryan Schumacher",
+                    "email": "ryan@38pages.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Redis Session Handler Symfony HttpFoundation Component",
+            "homepage": "http://symfony.com",
+            "keywords": [
+                "redis",
+                "session",
+                "symfony"
+            ],
+            "time": "2014-02-24 21:06:17"
         },
         {
             "name": "pimple/pimple",
