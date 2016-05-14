@@ -26,7 +26,7 @@ class DomainServiceProvider implements ServiceProviderInterface
         };
 
         $app['useCases.readArticle'] = function () use ($app) {
-            return new \Performance\Domain\UseCase\ReadArticle($app['orm.em']->getRepository('Performance\Domain\Article'));
+            return new \Performance\Domain\UseCase\ReadArticle($app['orm.em']->getRepository('Performance\Domain\Article'), $app['db.articleCounter']);
         };
 
         $app['useCases.listArticles'] = function () use ($app) {
@@ -34,7 +34,7 @@ class DomainServiceProvider implements ServiceProviderInterface
         };
 
         $app['controllers.readArticle'] = function () use ($app) {
-            return new \Performance\Controller\ArticleController($app['twig'], $app['useCases.readArticle']);
+            return new \Performance\Controller\ArticleController($app['twig'], $app['useCases.readArticle'], $app['session']);
         };
 
         $app['controllers.writeArticle'] = function () use ($app) {
@@ -55,6 +55,14 @@ class DomainServiceProvider implements ServiceProviderInterface
 
         $app['controllers.home'] = function () use ($app) {
             return new \Performance\Controller\HomeController($app['twig'], $app['useCases.listArticles']);
+        };
+
+        $app['db.redis.client'] = function () {
+            return new \Predis\Client("tcp://127.0.0.1:6379");
+        };
+
+        $app['db.articleCounter'] = function () use ($app) {
+            return new \Performance\Infrastructure\Database\RedisArticleCounterRepository($app["db.redis.client"]);
         };
     }
 }

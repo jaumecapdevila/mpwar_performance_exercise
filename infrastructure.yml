@@ -12,8 +12,6 @@
     - mysql-server
     - redis-server
     - php5-mysql
-    - pdo-mysql
-
 
 - name: "Ubuntu user is the owner of /var/www/html"
   file:
@@ -23,7 +21,6 @@
     mode: 0755
   become: yes
   become_user: root
-
 
 - name: "Restart Apache"
   become: yes

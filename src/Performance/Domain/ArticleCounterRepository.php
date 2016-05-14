@@ -6,10 +6,10 @@ namespace Performance\Domain;
 interface ArticleCounterRepository
 {
 
-    public function increaseByOne($articleId);
+    public function increaseByOne($user, $articleId);
 
     public function getTopFiveArticles();
 
-    public function getTopFiveArticlesByUser($userId);
+    public function getTopFiveArticlesByUser($user);
 
 }

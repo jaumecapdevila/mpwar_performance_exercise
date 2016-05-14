@@ -807,7 +807,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex/zipball/5f0fc5c1b00c6dd94469ee0627e9c6578c4bcf08",
+                "url": "https://api.github.com/repos/silexphp/Silex/zipball/17c0eedc0571aa9113b0f2c70356a087a1e640be",
                 "reference": "5f0fc5c1b00c6dd94469ee0627e9c6578c4bcf08",
                 "shasum": ""
             },
@@ -892,7 +892,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/ca6dee2229d62abfb081512737b9c72dedf9f953",
+                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/d3dd5bdb9d4b7cddaa04656c6e1b077e311dab94",
                 "reference": "ca6dee2229d62abfb081512737b9c72dedf9f953",
                 "shasum": ""
             },
