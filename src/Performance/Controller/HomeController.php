@@ -22,11 +22,19 @@ class HomeController
 
     public function get(Request $request)
     {
+        $this->fixETag($request);
         $articles = $this->useCase->execute();
         $response = new Response($this->template->render('home.twig', ['articles' => $articles]));
         $response->setETag(md5($response->getContent()));
-        $response->setPublic();
+        $response->setPublic(); // make sure the response is public/cacheable
         $response->isNotModified($request);
         return $response;
+    }
+
+    private function fixETag(Request $request)
+    {
+        $oldETag = $request->headers->get('if_none_match');
+        $etagWithoutGzip = str_replace('-gzip"', '"', $oldETag);
+        $request->headers->set('if_none_match', $etagWithoutGzip);
     }
 }
