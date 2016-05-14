@@ -32,9 +32,8 @@ class ArticleController
 
     public function get($articleId)
     {
-        $authorId = $this->session->get('authorId');
 
-        $article = $this->useCase->execute($articleId, $authorId);
+        $article = $this->useCase->execute($articleId);
 
         if (!$article) {
             throw new HttpException(404, "Article $articleId does not exist.");

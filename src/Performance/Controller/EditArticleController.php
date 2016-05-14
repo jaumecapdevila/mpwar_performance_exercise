@@ -63,6 +63,6 @@ class EditArticleController
 
         $this->useCase->execute($article, $title, $content);
 
-        return new RedirectResponse($this->url_generator->generate('article', ['article_id' => $request->get('article_id')]));
+        return new RedirectResponse($this->url_generator->generate('article', ['articleId' => $article]));
     }
 }

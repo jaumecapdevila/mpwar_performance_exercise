@@ -40,7 +40,7 @@ class WriteArticleController
 
     public function get()
     {
-        if (!$this->session->get('author_id')) {
+        if (!$this->session->get('authorId')) {
             return new RedirectResponse($this->url_generator->generate('login'));
         }
 
@@ -54,6 +54,6 @@ class WriteArticleController
 
     	$article = $this->useCase->execute($title, $content);
 
-        return new RedirectResponse($this->url_generator->generate('article', ['article_id' => $article->getId()]));
+        return new RedirectResponse($this->url_generator->generate('article', ['articleId' => $article->getId()]));
     }
 }

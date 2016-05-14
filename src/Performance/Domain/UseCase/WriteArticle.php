@@ -2,10 +2,12 @@
 
 namespace Performance\Domain\UseCase;
 
+use Doctrine\Common\Cache\Cache;
 use Performance\Domain\ArticleRepository;
 use Performance\Domain\Article;
 use Performance\Domain\AuthorRepository;
 use Performance\Domain\Exception\Forbidden;
+use Performance\Infrastructure\Cache\ArticleCache;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class WriteArticle
@@ -25,7 +27,12 @@ class WriteArticle
      */
 	private $session;
 
-    public function __construct(ArticleRepository $articleRepository, AuthorRepository $authorRepository, SessionInterface $session) {
+    public function __construct
+    (
+        ArticleRepository $articleRepository,
+        AuthorRepository $authorRepository,
+        SessionInterface $session
+    ) {
         $this->articleRepository = $articleRepository;
         $this->authorRepository = $authorRepository;
         $this->session = $session;
@@ -40,12 +47,12 @@ class WriteArticle
     }
 
     private function getAuthor() {
-        $author_id = $this->session->get('author_id');
+        $authorId = $this->session->get('authorId');
 
-        if (!$author_id) {
+        if (!$authorId) {
             throw new Forbidden('You must be logged in in order to write an article');
         }
 
-        return $this->authorRepository->findOneById($author_id);
+        return $this->authorRepository->findOneById($authorId);
     }
 }

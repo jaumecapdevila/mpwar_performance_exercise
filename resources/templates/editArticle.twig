@@ -2,11 +2,11 @@
 <meta charset="UTF-8">
 <head>
     <title>Edit article</title>
-    <link rel="stylesheet" type="text/css" href="../assets/dist/css/app.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url('home') }}../assets/dist/css/app.min.css">
 
 </head>
 <body>
-<form method="POST" action="{{ path('editArticle', {article_id: article.id}) }}">
+<form method="POST" action="{{ path('editArticle', {articleId: article.id}) }}">
     Title <br/>
     <input type="text" name="title" id="title" value="{{ article.title }}"/> <br/>
     <input type="hidden" name="article_id" id="article_id" value="{{ article.id }}"/> <br/>
@@ -15,6 +15,6 @@
     <br/>
     <input type="submit" value="Save"/>
 </form>
-<script type="text/javascript" src="assets/dist/js/index.min.js"></script>
+<script type="text/javascript" src="{{ url('home') }}../assets/dist/js/index.min.js"></script>
 </body>
 </html>
