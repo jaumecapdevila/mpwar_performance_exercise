@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-	<meta charset="UTF-8">
-	<head>
-		<title>Show article</title>
-	</head>
-	<link rel="stylesheet" type="text/css" href="assets/dist/css/app.min.css">
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-md-8">
-					<h1>
-						<a href="{{ path('article', {article_id: article.id}) }}">{{ article.title }}</a>
-					</h1>
-					<h3>by {{ article.author.username }}, on {{ article.date | date("d/m/Y H:i") }}</h3>
-					<p>
-						{{ article.content }}
-					</p>
-				</div>
-			</div>
-		</div>
-		
-	<script type="text/javascript" src="assets/dist/js/index.min.js"></script>
-	</body>
+<meta charset="UTF-8">
+<head>
+    <title>Show article</title>
+    <link rel="stylesheet" type="text/css" href="{{ url('home') }}../assets/dist/css/app.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <h1><a href="{{ path('article', {articleId: article.id}) }}">{{ article.title }}</a></h1>
+            <h3>by {{ article.author.username }}, on {{ article.date | date("d/m/Y H:i") }}</h3>
+            <p>
+                {{ article.content }}
+            </p>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{{ url('home') }}../assets/dist/js/index.min.js"></script>
+
+</body>
 </html>

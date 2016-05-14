@@ -2,18 +2,19 @@
 <meta charset="UTF-8">
 <head>
     <title>Edit article</title>
+    <link rel="stylesheet" type="text/css" href="../assets/dist/css/app.min.css">
+
 </head>
-<link rel="stylesheet" type="text/css" href="../assets/dist/css/app.min.css">
 <body>
-    <form method="POST" action="{{ path('editArticle', {article_id: article.id}) }}">
-        Title <br />
-        <input type="text" name="title" id="title" value="{{ article.title }}" /> <br />
-        <input type="hidden" name="article_id" id="article_id" value="{{ article.id }}" /> <br />
-        Text <br />
-        <textarea name="content" id="content" style="width: 300px; height: 150px;"> {{ article.content }}</textarea>
-        <br />
-        <input type="submit" value="Save" />
-    </form>
-    <script type="text/javascript" src="assets/dist/js/index.min.js"></script>
+<form method="POST" action="{{ path('editArticle', {article_id: article.id}) }}">
+    Title <br/>
+    <input type="text" name="title" id="title" value="{{ article.title }}"/> <br/>
+    <input type="hidden" name="article_id" id="article_id" value="{{ article.id }}"/> <br/>
+    Text <br/>
+    <textarea name="content" id="content" style="width: 300px; height: 150px;"> {{ article.content }}</textarea>
+    <br/>
+    <input type="submit" value="Save"/>
+</form>
+<script type="text/javascript" src="assets/dist/js/index.min.js"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 namespace Performance\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Performance\Domain\UseCase\ReadArticle;
 
@@ -18,17 +19,25 @@ class ArticleController
      */
     private $useCase;
 
-    public function __construct(\Twig_Environment $templating, ReadArticle $useCase) {
+    /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    public function __construct(\Twig_Environment $templating, ReadArticle $useCase, SessionInterface $session) {
         $this->template = $templating;
         $this->useCase = $useCase;
+        $this->session = $session;
     }
 
-    public function get($article_id)
+    public function get($articleId)
     {
-        $article = $this->useCase->execute($article_id);
+        $authorId = $this->session->get('authorId');
+
+        $article = $this->useCase->execute($articleId, $authorId);
 
         if (!$article) {
-            throw new HttpException(404, "Article $article_id does not exist.");
+            throw new HttpException(404, "Article $articleId does not exist.");
         }
 
         return new Response($this->template->render('article.twig', ['article' => $article]));

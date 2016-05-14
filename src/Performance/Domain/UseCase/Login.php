@@ -27,8 +27,7 @@ class Login
 
         if ($author) {
             if ($author->verifyPassword($plainTextPassword)) {
-                $this->session->set('author_id', $author->getId());
-
+                $this->session->set('authorId', $author->getId());
                 return true;
             }
         }

@@ -9,23 +9,36 @@ use Silex\Application;
 class RedisArticleCounterRepository implements ArticleCounterRepository
 {
 
-    public function __construct(Application $app)
-    {
+    const ARTICLES_KEY = "articles";
 
+    /**
+     * @var \Predis\Client
+     */
+    private $client;
+
+    public function __construct(\Predis\Client $client)
+    {
+        $this->client = $client;
     }
 
-    public function increaseByOne($articleId)
+    public function increaseByOne($user, $articleId)
     {
-        // TODO: Implement increaseByOne() method.
+        $this->client->zincrby($this->ARTICLES_BY_USER_KEY($user), 1, $articleId);
+        $this->client->zincrby(self::ARTICLES_KEY, 1, $articleId);
     }
 
     public function getTopFiveArticles()
     {
-        // TODO: Implement getTopFiveArticles() method.
+        return $this->client->zrevrange(self::ARTICLES_KEY, 0, 5);
     }
 
-    public function getTopFiveArticlesByUser($userId)
+    public function getTopFiveArticlesByUser($user)
     {
-        // TODO: Implement getTopFiveArticlesByUser() method.
+        return $this->client->zrevrange(self::ARTICLES_BY_USER_KEY($user), 0, 5);
+
+    }
+
+    private function ARTICLES_BY_USER_KEY($user) {
+        return $user . self::ARTICLES_KEY;
     }
 }

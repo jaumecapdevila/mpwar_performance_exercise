@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler;
+
 date_default_timezone_set('Europe/Madrid');
 
 $app['twig.path'] = array(__DIR__ . '/../templates');
@@ -9,7 +11,7 @@ $app['db.options'] = [
     "driver" => "pdo_mysql",
     "host" => 'localhost',
     "user" => 'root',
-    "password" => 'vagrantpass',
+    "password" => '',
     "dbname" => 'mpwar_performance_blog',
     "charset" => "utf8",
 ];
@@ -25,4 +27,12 @@ $app['orm.em.options'] = [
     ],
 ];
 
-$app['session.storage.handler'] = null;
+$app['db.redis.options'] = [
+    "host" => "127.0.0.1",
+    "port" => "6379",
+];
+
+$redisClient = new Redis();
+$redisClient->connect($app['db.redis.options']['host']);
+
+$app['session.storage.handler'] = new RedisSessionHandler($redisClient, 60 * 60 * 24 * 7);
