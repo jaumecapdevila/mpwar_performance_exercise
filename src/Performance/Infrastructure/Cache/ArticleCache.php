@@ -1,19 +1,13 @@
 <?php
 
+namespace Performance\Infrastructure\Cache;
 
-class ArticleCache implements Cac
+
+class ArticleCache
 {
-
-    public function __construct()
+    public static function articleKey($articleId)
     {
+        return $articleId."Cache";
     }
-
-    public static $allArticles = "allArticlesQuery";
-
-    public static function userArticles($user) {
-        return $user."ArticlesQuery";
-    }
-    
-    
 
 }

@@ -2,6 +2,7 @@
 
 namespace Performance;
 
+use Doctrine\Common\Cache\PredisCache;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
@@ -22,15 +23,19 @@ class DomainServiceProvider implements ServiceProviderInterface
         };
 
         $app['useCases.editArticle'] = function () use ($app) {
-            return new \Performance\Domain\UseCase\EditArticle($app['orm.em']->getRepository('Performance\Domain\Article'), $app['orm.em']->getRepository('Performance\Domain\Author'), $app['session']);
+            return new \Performance\Domain\UseCase\EditArticle($app['orm.em']->getRepository('Performance\Domain\Article'), $app['orm.em']->getRepository('Performance\Domain\Author'), $app['session'], $app['redisCache']);
         };
 
         $app['useCases.readArticle'] = function () use ($app) {
-            return new \Performance\Domain\UseCase\ReadArticle($app['orm.em']->getRepository('Performance\Domain\Article'), $app['db.articleCounter']);
+            return new \Performance\Domain\UseCase\ReadArticle($app['orm.em']->getRepository('Performance\Domain\Article'), $app['db.articleCounter'], $app['redisCache']);
         };
 
         $app['useCases.listArticles'] = function () use ($app) {
-            return new \Performance\Domain\UseCase\ListFiveMostViewedArticles($app['orm.em']->getRepository('Performance\Domain\Article'), $app['db.articleCounter'], $app['articlesCache']);
+            return new \Performance\Domain\UseCase\ListFiveMostViewedArticles($app['orm.em']->getRepository('Performance\Domain\Article'), $app['db.articleCounter']);
+        };
+
+        $app['useCases.listUserArticles'] = function () use ($app) {
+            return new \Performance\Domain\UseCase\ListFiveMostViewedArticlesPerUser($app['orm.em']->getRepository('Performance\Domain\Article'), $app['db.articleCounter']);
         };
 
         $app['controllers.readArticle'] = function () use ($app) {
@@ -54,12 +59,16 @@ class DomainServiceProvider implements ServiceProviderInterface
         };
 
         $app['controllers.home'] = function () use ($app) {
-            return new \Performance\Controller\HomeController($app['twig'], $app['useCases.listArticles'], $app['session']);
+            return new \Performance\Controller\HomeController($app['twig'], $app['useCases.listArticles'], $app['useCases.listUserArticles'], $app['session']);
         };
 
         $app['db.redis.client'] = function () use ($app) {
             $redisHost = "tcp://".$app['db.redis.options']['host'].":".$app['db.redis.options']['port'];
             return new \Predis\Client($redisHost);
+        };
+
+        $app['redisCache'] = function () use ($app) {
+            return new PredisCache($app['db.redis.client']);
         };
 
         $app['db.articleCounter'] = function () use ($app) {

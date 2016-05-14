@@ -3,27 +3,11 @@
 namespace Performance\Domain\UseCase;
 
 
-use Doctrine\Common\Cache\Cache;
 use Performance\Domain\ArticleCounterRepository;
 use Performance\Domain\ArticleRepository;
-use Performance\Infrastructure\Cache\ArticleCache;
 
-class ListFiveMostViewedArticles
+class ListFiveMostViewedArticlesPerUser
 {
-
-    const ALL_USERS = "all";
-
-    /**
-     * @var ArticleRepository
-     */
-    private $articleRepository;
-
-    /**
-     * @var ArticleCounterRepository
-     */
-    private $articleCounterRepository;
-
-
     public function __construct
     (
         ArticleRepository $articleRepository,
@@ -33,10 +17,9 @@ class ListFiveMostViewedArticles
         $this->articleRepository = $articleRepository;
         $this->articleCounterRepository = $articleCounterRepository;
     }
-
-    public function execute()
+    
+    public function execute($user = null)
     {
-
         $mostViewedArticleIds = $this->articleCounterRepository->getTopFiveArticles();
 
         $mostViewedArticles = $this->articleRepository->getListByIds($mostViewedArticleIds);
@@ -55,6 +38,7 @@ class ListFiveMostViewedArticles
 
         return $orderedMostViewedArticles;
 
+        
     }
 
     private function searchArticleById($articleId, array $articles)
@@ -65,5 +49,5 @@ class ListFiveMostViewedArticles
 
         return null;
     }
-
+    
 }
