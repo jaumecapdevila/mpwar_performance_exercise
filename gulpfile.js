@@ -17,15 +17,21 @@ gulp.task('build-js', function() {
         .pipe(rename("index.min.js"))
         .pipe(gulp.dest('./web/assets/dist/js'));
 });
+gulp.task('clean-css', function() {
+    return gulp.src('./src/assets/dist/css/app.css')
+        .pipe(cleanCSS({}))
+        .pipe(rename("app.min.css"))
+        .pipe(gulp.dest('./src/assets/dist/css'));
+});
 
 gulp.task('minify-css', function() {
     return gulp.src(
             [
                 './node_modules/bootstrap/dist/css/bootstrap.css',
                 './node_modules/bootstrap/dist/css/bootstrap-theme.css',
-                './src/assets/dist/css/app.css'
+                './src/assets/dist/css/app.min.css'
             ])
-        .pipe(concat('./src/assets/dist/css/bundle.css'))
+        .pipe(concat('bundle.css'))
         .pipe(rename("app.min.css"))
         .pipe(gulp.dest('./web/assets/dist/css'));
 });
@@ -34,4 +40,4 @@ gulp.task('watch', function() {
     gulp.watch(['./web/assets/dist/js/index.js', './web/assets/dist/css/app.css'], ['prod']);
 });
 
-gulp.task('default', ['build-js', 'minify-css'], function() {});
+gulp.task('default', ['build-js', 'clean-css', 'minify-css'], function() {});
