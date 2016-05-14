@@ -24,6 +24,31 @@
             {% endfor %}
         </div>
     </div>
+
+    <div class="row">
+        <h1>Articles written by user</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            {% for article in userArticles %}
+                <h1><a href="{{ path('article', {articleId: article.id}) }}">{{ article.title | title }}</a></h1>
+                <h3>by {{ article.author.username }}, on {{ article.date | date("d/m/Y H:i") }}</h3>
+                <p>
+                    {% if article.content | length > 100 %}
+                        {{ article.content | slice(0,100) }}
+                        <a href="{{ path('article', {articleId: article.id}) }}">more&hellip;</a>
+                    {% else %}
+                        {{ article.content }}
+                    {% endif %}
+                </p>
+            {% else %}
+                <h1>The user has written no articles</h1>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+
 </div>
 
 <script type="text/javascript" src="{{ url('home') }}../assets/dist/js/index.min.js"></script>
