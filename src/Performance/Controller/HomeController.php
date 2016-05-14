@@ -13,14 +13,14 @@ class HomeController
      */
     private $template;
 
-    public function __construct(\Twig_Environment $templating, ListArticles $useCase, Request $request)
+    public function __construct(\Twig_Environment $templating, ListArticles $useCase)
     {
         $this->template = $templating;
         $this->useCase = $useCase;
-        $this->request = $request;
+
     }
 
-    public function get()
+    public function get(Request $request)
     {
         $articles = $this->useCase->execute();
         $response = new Response($this->template->render('home.twig', ['articles' => $articles]));
