@@ -30,14 +30,14 @@ class ArticleController
         $this->session = $session;
     }
 
-    public function get($article_id)
+    public function get($articleId)
     {
-        $authorId = $this->session->get('author_id');
+        $authorId = $this->session->get('authorId');
 
-        $article = $this->useCase->execute($article_id, $authorId);
+        $article = $this->useCase->execute($articleId, $authorId);
 
         if (!$article) {
-            throw new HttpException(404, "Article $article_id does not exist.");
+            throw new HttpException(404, "Article $articleId does not exist.");
         }
 
         return new Response($this->template->render('article.twig', ['article' => $article]));

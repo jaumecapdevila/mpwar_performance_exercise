@@ -2,7 +2,7 @@
 
 namespace Performance\Controller;
 
-use Performance\Domain\UseCase\ListArticles;
+use Performance\Domain\UseCase\ListFiveMostViewedArticles;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,7 +13,7 @@ class HomeController
      */
     private $template;
 
-    public function __construct(\Twig_Environment $templating, ListArticles $useCase)
+    public function __construct(\Twig_Environment $templating, ListFiveMostViewedArticles $useCase)
     {
         $this->template = $templating;
         $this->useCase = $useCase;

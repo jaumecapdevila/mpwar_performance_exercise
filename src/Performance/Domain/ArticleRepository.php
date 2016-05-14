@@ -13,4 +13,6 @@ interface ArticleRepository
 	public function findOneById($article_id);
 
 	public function findAll();
+
+	public function getListByIds(array $articleIds);
 }

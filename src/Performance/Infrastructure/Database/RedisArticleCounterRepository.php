@@ -29,12 +29,12 @@ class RedisArticleCounterRepository implements ArticleCounterRepository
 
     public function getTopFiveArticles()
     {
-        $this->client->zrevrange(self::ARTICLES_KEY, 0, 5);
+        return $this->client->zrevrange(self::ARTICLES_KEY, 0, 5);
     }
 
     public function getTopFiveArticlesByUser($user)
     {
-        $this->client->zrevrange(self::ARTICLES_BY_USER_KEY($user), 0, 5);
+        return $this->client->zrevrange(self::ARTICLES_BY_USER_KEY($user), 0, 5);
 
     }
 

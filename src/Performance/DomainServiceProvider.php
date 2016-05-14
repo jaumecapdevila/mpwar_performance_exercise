@@ -30,7 +30,7 @@ class DomainServiceProvider implements ServiceProviderInterface
         };
 
         $app['useCases.listArticles'] = function () use ($app) {
-            return new \Performance\Domain\UseCase\ListArticles($app['orm.em']->getRepository('Performance\Domain\Article'));
+            return new \Performance\Domain\UseCase\ListFiveMostViewedArticles($app['orm.em']->getRepository('Performance\Domain\Article'), $app['db.articleCounter']);
         };
 
         $app['controllers.readArticle'] = function () use ($app) {
@@ -57,12 +57,13 @@ class DomainServiceProvider implements ServiceProviderInterface
             return new \Performance\Controller\HomeController($app['twig'], $app['useCases.listArticles']);
         };
 
-        $app['db.redis.client'] = function () {
-            return new \Predis\Client("tcp://127.0.0.1:6379");
+        $app['db.redis.client'] = function () use ($app) {
+            $redisHost = "tcp://".$app['db.redis.options']['host'].":".$app['db.redis.options']['port'];
+            return new \Predis\Client($redisHost);
         };
 
         $app['db.articleCounter'] = function () use ($app) {
-            return new \Performance\Infrastructure\Database\RedisArticleCounterRepository($app["db.redis.client"]);
+            return new \Performance\Infrastructure\Database\RedisArticleCounterRepository($app['db.redis.client']);
         };
     }
 }
