@@ -1,6 +1,6 @@
 ---
 
-- name: "Install PHP5 and Apache2"
+- name: "Install PHP5, Apache2 and Redis"
   apt:
     name: "{{item}}"
     state: present
@@ -10,6 +10,9 @@
   with_items:
     - php5
     - mysql-server
+    - redis-server
+    - php5-mysql
+    - pdo-mysql
 
 
 - name: "Ubuntu user is the owner of /var/www/html"
@@ -20,3 +23,9 @@
     mode: 0755
   become: yes
   become_user: root
+
+
+- name: "Restart Apache"
+  become: yes
+  become_user: root
+  service: name=apache2 state=reloaded
