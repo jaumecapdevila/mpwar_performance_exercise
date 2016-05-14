@@ -18,7 +18,7 @@ class DoctrineArticleRepository extends EntityRepository implements ArticleRepos
     }
 
     /**
-     * @param $article_id
+     * @param $articleId
      * @return null|Article
      */
     public function findOneById($articleId)
@@ -33,14 +33,16 @@ class DoctrineArticleRepository extends EntityRepository implements ArticleRepos
 
         $qb = $this->_em->createQueryBuilder();
         $qb->select("a")
-            ->from("a", "Performance\\Domain\\Article")
-            ->where($qb->expr()->eq(self::ARTICLE_ID_KEY, $articleIds[0]));
+            ->from("Performance\\Domain\\Article", "a")
+            ->where($qb->expr()->eq("a.".self::ARTICLE_ID_KEY, $articleIds[0]));
 
-        for ($i = 1; $i <= 5; $i++) {
-            $qb->orWhere($qb->expr()->eq(self::ARTICLE_ID_KEY, $articleIds[$i]));
+        array_shift($articleIds);
+
+        foreach ($articleIds as $articleId) {
+            $qb->orWhere($qb->expr()->eq("a.".self::ARTICLE_ID_KEY, $articleId));
         }
 
-        return $qb->getResult();
+        return $qb->getQuery()->getResult();
 
     }
 }

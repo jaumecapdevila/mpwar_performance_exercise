@@ -8,7 +8,8 @@
 		"sorien/silex-dbal-profiler": "~2.0@dev",
 		"symfony/yaml": "~3.0",
 		"symfony/twig-bridge": "~3.0",
-		"predis/predis": "^1.0"
+		"predis/predis": "^1.0",
+		"jrschumacher/symfony-redis-session-handler": "^1.0"
     },
     "autoload": {
         "psr-4": { "Performance\\": "src/Performance" }
