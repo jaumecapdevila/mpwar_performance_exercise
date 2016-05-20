@@ -56,11 +56,11 @@ class HomeController
         $userArticles = [];
         $articles = $this->useCase->execute();
         $image = '';
-        if (!is_null($this->session)) {
+
+        if (!is_null($this->session->get('authorId'))) {
             $authorId = $this->session->get('authorId');
             $userArticles = $this->concreteUserUseCase->execute($authorId);
             $image = $this->getUserImage->execute($authorId);
-
         }
         $response = new Response($this->template->render('home.twig', ['articles' => $articles, 'userArticles' => $userArticles, 'userImage' => $image]));
         $response->setETag(md5($response->getContent()));
