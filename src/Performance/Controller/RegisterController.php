@@ -45,6 +45,7 @@ class RegisterController
     public function post(Request $request)
     {
         include __DIR__ . '/../../../resources/config/aws_credentials.php';
+
         $username = $request->request->get('username');
         $password = $request->request->get('password');
         $image = $request->files->get('image');
@@ -64,7 +65,7 @@ class RegisterController
         $finalImageName = $this->renameImage($username);
         $image->move(__DIR__ . '/../../../tmp', $finalImageName);
 
-        $filesystem->write('uploads/profile/' . $finalImageName, file_get_contents(__DIR__ . '/../../../tmp/' . $finalImageName));
+        $filesystem->write($finalImageName, file_get_contents(__DIR__ . '/../../../tmp/' . $finalImageName));
 
         $this->useCase->execute($username, $password, $finalImageName);
 

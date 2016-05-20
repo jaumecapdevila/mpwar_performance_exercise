@@ -10,7 +10,7 @@ $app['db.options'] = [
     "driver" => "pdo_mysql",
     "host" => 'localhost',
     "user" => 'root',
-    "password" => '',
+    "password" => 'vagrantpass',
     "dbname" => 'mpwar_performance_blog',
     "charset" => "utf8",
 ];
@@ -35,4 +35,3 @@ $redisClient = new Redis();
 $redisClient->connect($app['db.redis.options']['host']);
 
 $app['session.storage.handler'] = new RedisSessionHandler($redisClient, 60 * 60 * 24 * 7);
-

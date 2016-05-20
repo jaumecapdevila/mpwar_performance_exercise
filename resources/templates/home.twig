@@ -47,6 +47,15 @@
             {% endfor %}
         </div>
     </div>
+    {% if userImage is empty %}
+    {% else %}
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+             <img src="https://performancebcket.s3.amazonaws.com/uploads/profile/{{userImage}}" alt="User Image">
+        </div>
+    </div>
+    {% endif %}
+     
 
 </div>
 

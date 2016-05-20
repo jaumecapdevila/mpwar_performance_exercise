@@ -45,7 +45,7 @@ class Author
         return $this->username;
     }
 
-    public function getImagePath()
+    public function getImage()
     {
         return $this->image;
     }

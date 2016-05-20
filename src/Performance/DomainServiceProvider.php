@@ -14,6 +14,10 @@ class DomainServiceProvider implements ServiceProviderInterface
             return new \Performance\Domain\UseCase\SignUp($app['orm.em']->getRepository('Performance\Domain\Author'));
         };
 
+        $app['useCases.getUserImage'] = function () use ($app) {
+            return new \Performance\Domain\UseCase\GetUserImage($app['orm.em']->getRepository('Performance\Domain\Author'));
+        };
+
         $app['useCases.login'] = function () use ($app) {
             return new \Performance\Domain\UseCase\Login($app['orm.em']->getRepository('Performance\Domain\Author'), $app['session']);
         };
@@ -59,11 +63,11 @@ class DomainServiceProvider implements ServiceProviderInterface
         };
 
         $app['controllers.home'] = function () use ($app) {
-            return new \Performance\Controller\HomeController($app['twig'], $app['useCases.listArticles'], $app['useCases.listUserArticles'], $app['session']);
+            return new \Performance\Controller\HomeController($app['twig'], $app['useCases.listArticles'], $app['useCases.listUserArticles'], $app['useCases.getUserImage'], $app['session']);
         };
 
         $app['db.redis.client'] = function () use ($app) {
-            $redisHost = "tcp://".$app['db.redis.options']['host'].":".$app['db.redis.options']['port'];
+            $redisHost = "tcp://" . $app['db.redis.options']['host'] . ":" . $app['db.redis.options']['port'];
             return new \Predis\Client($redisHost);
         };
 
