@@ -44,14 +44,16 @@ class RegisterController
 
     public function post(Request $request)
     {
-        $aws = include __DIR__ . '/../../../resources/config/aws_credentials.php';
+        include __DIR__ . '/../../../resources/config/aws_credentials.php';
         $username = $request->request->get('username');
         $password = $request->request->get('password');
         $image = $request->files->get('image');
-        var_dump($aws);
-        die;
+
         $client = new S3Client([
-            $aws[0],
+            'credentials' => [
+                'key' => $key,
+                'secret' => $secret,
+            ],
             'region' => 'eu-west-1',
             'version' => 'latest',
         ]);
