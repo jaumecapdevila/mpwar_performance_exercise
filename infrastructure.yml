@@ -11,7 +11,15 @@
     - php5
     - mysql-server
     - redis-server
+    - php5-redis
     - php5-mysql
+
+- name: install composer
+  become: yes
+  become_user: root
+  shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  args:
+    creates: /usr/local/bin/composer
 
 - name: "Ubuntu user is the owner of /var/www/html"
   file:
@@ -26,3 +34,6 @@
   become: yes
   become_user: root
   service: name=apache2 state=reloaded
+
+# Downloads and installs all the libs and dependencies outlined in the /path/to/project/composer.lock
+- composer: command=install working_dir=/var/www/html/current/mpwar_performance_exercise/
