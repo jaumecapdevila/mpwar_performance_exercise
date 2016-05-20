@@ -14,3 +14,6 @@ Performance\Domain\Author:
     password:
       type: string
       length: 255
+    image:
+      type: string
+      length: 255

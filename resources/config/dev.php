@@ -21,5 +21,5 @@ $app['db.options'] = [
     "charset" => "utf8",
 ];
 
-$app['profiler.cache_dir'] 			= __DIR__ . '/../../var/cache/profiler';
-$app['profiler.mount_prefix'] 		= '/_profiler';
+$app['profiler.cache_dir'] = __DIR__ . '/../../var/cache/profiler';
+$app['profiler.mount_prefix'] = '/_profiler';
