@@ -1,7 +1,6 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler;
-
 date_default_timezone_set('Europe/Madrid');
 
 $app['twig.path'] = array(__DIR__ . '/../templates');
