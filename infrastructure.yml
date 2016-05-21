@@ -34,6 +34,3 @@
   become: yes
   become_user: root
   service: name=apache2 state=reloaded
-
-# Downloads and installs all the libs and dependencies outlined in the /path/to/project/composer.lock
-- composer: command=install working_dir=/var/www/html/current/mpwar_performance_exercise/

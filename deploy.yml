@@ -5,5 +5,6 @@
     ansistrano_before_setup_tasks_file: "{{ playbook_dir }}/infrastructure.yml"
     ansistrano_before_update_code_tasks_file: "{{ playbook_dir }}/build.yml"
     ansistrano_deploy_to: "/var/www/html"
+    ansistrano_after_update_code_tasks_file: "{{ playbook_dir }}/composer_install.yml"
   roles:
     - { role: carlosbuenosvinos.ansistrano-deploy }
