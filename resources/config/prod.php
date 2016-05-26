@@ -8,7 +8,7 @@ $app['twig.options'] = [];
 
 $app['db.options'] = [
     "driver" => "pdo_mysql",
-    "host" => 'localhost',
+    "host" => '54.194.20.140',
     "user" => 'root',
     "password" => '',
     "dbname" => 'mpwar_performance_blog',
@@ -27,7 +27,7 @@ $app['orm.em.options'] = [
 ];
 
 $app['db.redis.options'] = [
-    "host" => "127.0.0.1",
+    "host" => "54.194.186.160",
     "port" => "6379",
 ];
 
