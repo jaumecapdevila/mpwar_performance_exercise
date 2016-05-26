@@ -6,5 +6,10 @@
     ansistrano_before_update_code_tasks_file: "{{ playbook_dir }}/build.yml"
     ansistrano_deploy_to: "/var/www/html"
     ansistrano_after_update_code_tasks_file: "{{ playbook_dir }}/composer_install.yml"
+    blackfire_server_id:    "1e9f3a1c-f193-4029-82d9-1dc5af0492f2"
+    blackfire_server_token: "1715b73ef1ebeb8fb74aaa72981ff3d088418893c96dca7e4a6597d5cdc8a7dc"
+    blackfire_apache_enable: true
+    blackfire_php_fpm_enable: false
   roles:
     - { role: carlosbuenosvinos.ansistrano-deploy }
+    - { role: AbdoulNdiaye.Blackfire, sudo: yes }
