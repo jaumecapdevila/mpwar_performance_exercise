@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url('home') }}../assets/dist/css/app.min.css">
+</head>
+<body>
+<div class="container">
+   {% block content %}{% endblock %}
+</div>
+<script type="text/javascript" src="{{ url('home') }}../assets/dist/js/index.min.js"></script>
+
+</body>
+</html>

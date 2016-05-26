@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<meta charset="UTF-8">
-<head>
-    <title>Edit article</title>
-    <link rel="stylesheet" type="text/css" href="{{ url('home') }}../assets/dist/css/app.min.css">
+{% extends "layout.twig" %}
 
-</head>
-<body>
-<form method="POST" action="{{ path('editArticle', {articleId: article.id}) }}">
-    Title <br/>
-    <input type="text" name="title" id="title" value="{{ article.title }}"/> <br/>
-    <input type="hidden" name="article_id" id="article_id" value="{{ article.id }}"/> <br/>
-    Text <br/>
-    <textarea name="content" id="content" style="width: 300px; height: 150px;"> {{ article.content }}</textarea>
-    <br/>
-    <input type="submit" value="Save"/>
-</form>
-<script type="text/javascript" src="{{ url('home') }}../assets/dist/js/index.min.js"></script>
-</body>
-</html>
+{% block title %}Edit Article{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-12 col-md-8">
+        <form method="POST" action="{{ path('editArticle', {articleId: article.id}) }}">
+            Title <br/>
+            <input type="text" name="title" id="title" value="{{ article.title }}"/> <br/>
+            <input type="hidden" name="article_id" id="article_id" value="{{ article.id }}"/> <br/>
+            Text <br/>
+            <textarea name="content" id="content" style="width: 300px; height: 150px;"> {{ article.content }}</textarea>
+            <br/>
+            <input type="submit" value="Save"/>
+        </form>
+    </div>
+</div>
+{% endblock %}
