@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RegisterController
 {
-    const IMAGE_PREFIX = 'mpwar_performance_blog_';
     /**
      * @var \Twig_Environment
      */
@@ -65,7 +64,7 @@ class RegisterController
         $finalImageName = $this->renameImage($username);
         $image->move(__DIR__ . '/../../../tmp', $finalImageName);
 
-        $filesystem->write($finalImageName, file_get_contents(__DIR__ . '/../../../tmp/' . $finalImageName));
+        $filesystem->write('/uploads/profile/' . $finalImageName, file_get_contents(__DIR__ . '/../../../tmp/' . $finalImageName));
 
         $this->useCase->execute($username, $password, $finalImageName);
 
@@ -74,6 +73,7 @@ class RegisterController
 
     private function renameImage($username)
     {
-        return md5(self::IMAGE_PREFIX . $username) . '.png';
+        $salt = uniqid(mt_rand(), true);
+        return md5($salt . $username) . '.png';
     }
 }
