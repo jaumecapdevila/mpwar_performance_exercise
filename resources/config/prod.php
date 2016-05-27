@@ -1,6 +1,5 @@
 <?php
 
-use Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler;
 date_default_timezone_set('Europe/Madrid');
 
 $app['twig.path'] = array(__DIR__ . '/../templates');
@@ -30,8 +29,3 @@ $app['db.redis.options'] = [
     "host" => "54.194.186.160",
     "port" => "6379",
 ];
-
-$redisClient = new Redis();
-$redisClient->connect($app['db.redis.options']['host']);
-
-$app['session.storage.handler'] = new RedisSessionHandler($redisClient, 60 * 60 * 24 * 7);

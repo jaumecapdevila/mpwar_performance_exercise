@@ -6,10 +6,12 @@ use Doctrine\Common\Cache\PredisCache;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
+
 class DomainServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $app)
     {
+        
         $app['useCases.signUp'] = function () use ($app) {
             return new \Performance\Domain\UseCase\SignUp($app['orm.em']->getRepository('Performance\Domain\Author'));
         };

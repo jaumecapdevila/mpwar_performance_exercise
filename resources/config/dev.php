@@ -5,6 +5,7 @@ use Silex\Provider;
 // include the prod configuration
 require __DIR__ . '/prod.php';
 
+
 // enable the debug mode
 $app['debug'] = true;
 
@@ -19,6 +20,11 @@ $app['db.options'] = [
     "password" => 'vagrantpass',
     "dbname" => 'mpwar_performance_blog',
     "charset" => "utf8",
+];
+
+$app['db.redis.options'] = [
+    "host" => "localhost",
+    "port" => "6379",
 ];
 
 $app['profiler.cache_dir'] = __DIR__ . '/../../var/cache/profiler';
