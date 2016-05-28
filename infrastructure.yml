@@ -13,6 +13,9 @@
     - redis-server
     - php5-redis
     - php5-mysql
+    - pdo
+    - php5-gd
+    - python-mysqldb
 
 - name: install composer
   become: yes
