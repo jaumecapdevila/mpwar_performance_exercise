@@ -53,6 +53,7 @@ class HomeController
 
     public function get(Request $request)
     {
+        $this->fixETag($request);
         $userArticles = [];
         $articles = $this->useCase->execute();
         $image = '';
@@ -67,5 +68,12 @@ class HomeController
         $response->setPublic();
         $response->isNotModified($request);
         return $response;
+    }
+
+    private function fixETag(Request $request)
+    {
+        $oldETag = $request->headers->get('if_none_match');
+        $etagWithoutGzip = str_replace('-gzip"', '"', $oldETag);
+        $request->headers->set('if_none_match', $etagWithoutGzip);
     }
 }

@@ -9,9 +9,4 @@ require __DIR__ . '/../resources/config/prod.php';
 require __DIR__ . '/../src/controllers.php';
 require __DIR__ . '/../src/redis_ini.php';
 
-Debug::enable();
-
-$app['debug'] = true;
-
-
 $app->run();

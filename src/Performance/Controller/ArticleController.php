@@ -32,13 +32,24 @@ class ArticleController
 
     public function get($articleId)
     {
-
+        $this->fixETag($request);
         $article = $this->useCase->execute($articleId);
 
         if (!$article) {
             throw new HttpException(404, "Article $articleId does not exist.");
         }
 
-        return new Response($this->template->render('article.twig', ['article' => $article]));
+        $response = new Response($this->template->render('article.twig', ['article' => $article]));
+        $response->setETag(md5($response->getContent()));
+        $response->setPublic();
+        $response->isNotModified($request);
+        return $response;
+    }
+
+    private function fixETag(Request $request)
+    {
+        $oldETag = $request->headers->get('if_none_match');
+        $etagWithoutGzip = str_replace('-gzip"', '"', $oldETag);
+        $request->headers->set('if_none_match', $etagWithoutGzip);
     }
 }

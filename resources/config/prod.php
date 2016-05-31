@@ -7,9 +7,9 @@ $app['twig.options'] = [];
 
 $app['db.options'] = [
     "driver" => "pdo_mysql",
-    "host" => '54.194.167.86',
+    "host" => 'blogapp.crhgjovaqlg8.eu-west-1.rds.amazonaws.com',
     "user" => 'bob',
-    "password" => 'foobar',
+    "password" => '12345678bob',
     "dbname" => 'mpwar_performance_blog',
     "charset" => "utf8",
 ];
@@ -26,6 +26,6 @@ $app['orm.em.options'] = [
 ];
 
 $app['db.redis.options'] = [
-    "host" => "54.194.167.86",
+    "host" => "bob.eqgb4i.0001.euw1.cache.amazonaws.com",
     "port" => "6379",
 ];

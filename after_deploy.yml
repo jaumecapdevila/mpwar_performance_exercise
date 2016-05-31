@@ -1,10 +1,3 @@
 ---
 
 - composer: command=install working_dir=/var/www/html/current/mpwar_performance_exercise/
-
-- mysql_user: name=bob password=foobar host_all=yes priv="*.*:ALL,GRANT" state=present login_user=root login_password=root
-
-- name: Copy init file config.
-  become: yes
-  become_user: root
-  copy: src=/var/www/mpwar_performance_exercise/resources/my.cnf dest=/root/.my.cnf owner=root group=root mode=644
