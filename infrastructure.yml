@@ -24,9 +24,10 @@
 
 - name: "Ubuntu user is the owner of /var/www/html"
   file:
-    path: /var/www/html
+    path: /var/www/html/current/mpwar_performance_exercise
     owner: ubuntu
     group: ubuntu
+    state: directory
     mode: 0755
   become: yes
   become_user: root
