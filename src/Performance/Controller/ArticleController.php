@@ -2,6 +2,7 @@
 
 namespace Performance\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -30,7 +31,7 @@ class ArticleController
         $this->session = $session;
     }
 
-    public function get($articleId)
+    public function get(Request $request, $articleId)
     {
         $this->fixETag($request);
         $article = $this->useCase->execute($articleId);
