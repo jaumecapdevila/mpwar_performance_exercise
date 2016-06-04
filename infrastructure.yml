@@ -1,0 +1,37 @@
+---
+
+- name: "Install PHP5, Apache2 and Redis"
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  become: yes
+  become_user: root
+  with_items:
+    - php5
+    - mysql-server
+    - redis-server
+    - php5-redis
+    - php5-mysql
+    - python-mysqldb
+
+- name: install composer
+  become: yes
+  become_user: root
+  shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  args:
+    creates: /usr/local/bin/composer
+
+- name: "Ubuntu user is the owner of /var/www/html"
+  file:
+    path: /var/www/html
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755
+  become: yes
+  become_user: root
+
+- name: "Restart Apache"
+  become: yes
+  become_user: root
+  service: name=apache2 state=reloaded
